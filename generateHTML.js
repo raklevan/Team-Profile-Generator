@@ -4,27 +4,13 @@ const path = require("path");
 const util = require("util");
 
 // Constructors
-const Manager = require("./constructors/Manager.js");
-const Engineer = require("./constructors/Engineer.js");
-const Intern = require("./constructors/Intern.js");
+const Manager = require("./constructors/Manager");
+const Engineer = require("./constructors/Engineer");
+const Intern = require("./constructors/Intern");
 
 // File paths
 // Absolute path for templates directory
-
-
-
-
-
-
 const templatesDir = path.resolve(__dirname, "./templates");
-
-
-
-
-
-
-
-
 // Absolute path for build directory
 const buildDir = path.resolve(__dirname, "./build/");
 
@@ -45,22 +31,12 @@ async function render(employees) {
     internTemplate,
     engineerTemplate,
     mainTemplate
-  ] =  
-  await Promise.all([
+  ] = await Promise.all([
     readFile(path.resolve(templatesDir, "manager.html"), "utf8"),
     readFile(path.resolve(templatesDir, "intern.html"), "utf8"),
     readFile(path.resolve(templatesDir, "engineer.html"), "utf8"),
     readFile(path.resolve(templatesDir, "main.html"), "utf8")
   ]);
-  
-  
-  
-  // await Promise.all([
-  //   readFile(path.resolve(templatesDir, "manager.html"), "utf8"),
-  //   readFile(path.resolve(templatesDir, "intern.html"), "utf8"),
-  //   readFile(path.resolve(templatesDir, "engineer.html"), "utf8"),
-  //   readFile(path.resolve(templatesDir, "main.html"), "utf8")
-  // ]);
 
   // Render Manager Templates
   html.push(
@@ -78,32 +54,10 @@ async function render(employees) {
 
   // Render Engineer Templates
   // TODO
-  html.push(
-    employees
-      .filter(employee => employee instanceof Engineer)
-      .map(employee => {
-        let template = engineerTemplate;
-        for (const key in employee) {
-          template = replacePlaceholder(template, key, employee[key]);
-        }
-        return template;
-      })
-      .join("")
-  );
+
   // Render Intern Templates
   // TODO
-  html.push(
-    employees
-      .filter(employee => employee instanceof Intern)
-      .map(employee => {
-        let template = internTemplate;
-        for (const key in employee) {
-          template = replacePlaceholder(template, key, employee[key]);
-        }
-        return template;
-      })
-      .join("")
-  );
+
   // If the build directory does not exist
   if (!fs.existsSync(buildDir)) {
     // Build "build" directory
@@ -128,17 +82,5 @@ function replacePlaceholder(template, target, value) {
   const newTemplate = template.replace(regex, value);
   return newTemplate;
 }
-
-// render(
-//   `[
-//     Manager {
-//       name: 'Lenny',
-//       id: 23423,
-//       email: 'lkdsjh',
-//       officeNumber: 98234798
-//     }
-//   ]`
-
-// )
 
 module.exports = render;

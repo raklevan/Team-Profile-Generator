@@ -149,20 +149,12 @@ async function createTeam(){
     
     console.log(teamMembers)
 
+    // generateHTML(teamMembers);
+
     let addMember=true;
 
     while(addMember){
-        next();
-    }       
-}
-
-
-
-
-async function next(){
-
-    addMember=false;
-
+        
     const nextAction = await inquirer.prompt(options);
     const {action}= nextAction;
 
@@ -175,7 +167,6 @@ async function next(){
             var {name, id, email, github} = getEngineer;
             teamMembers.push(new Engineer(name, parseInt(id), email, github));
             console.log(teamMembers)
-            addMember=true;
             break;
 
         case 'add intern':
@@ -183,21 +174,58 @@ async function next(){
             var  {name, id, email, school} = getIntern;
             teamMembers.push(new Engineer(name, parseInt(id), email, school ));
             console.log(teamMembers)
-            addMember=true;
             break;
 
         case 'build team profile':
-            generateHTML(teamMembers)  
+            generateHTML(teamMembers); 
             addMember=false;
-
-            
+            break;
+        default: addMember=false;
 
     }
-
-
-
-
+    }       
 }
+
+
+
+
+// async function next(){
+
+//     addMember=false
+
+    // const nextAction = await inquirer.prompt(options);
+    // const {action}= nextAction;
+
+    // // console.log(teamMembers)
+
+
+    // switch(action){
+    //     case 'add engineer' :
+    //         const getEngineer = await inquirer.prompt(engineerQuestions);
+    //         var {name, id, email, github} = getEngineer;
+    //         teamMembers.push(new Engineer(name, parseInt(id), email, github));
+    //         console.log(teamMembers)
+    //         break;
+
+    //     case 'add intern':
+    //         const getIntern = await inquirer.prompt(internQuestions);
+    //         var  {name, id, email, school} = getIntern;
+    //         teamMembers.push(new Engineer(name, parseInt(id), email, school ));
+    //         console.log(teamMembers)
+    //         break;
+
+    //     case 'build team profile':
+    //         generateHTML(teamMembers); 
+    //         addMember=false;
+    //         break;
+    //     default: addMember=false;
+
+    // }
+
+
+
+
+
 
 
 

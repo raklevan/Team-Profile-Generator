@@ -11,14 +11,14 @@ class Engineer extends Employee {
    * @param {string} name - Name of the Engineer
    * @param {number} id - ID of the Engineer
    * @param {string} email - Email of the Engineer
-   * @param {number} gitty - gitty username of the Engineer
+   * @param {number} github - Github username of the Engineer
    */
-  constructor(name, id, email, gitty) {
-    if (!gitty || !gitty.trim().length) {
-      throw new Error("Expected parameter 'gitty' to be a non-empty string");
+  constructor(name, id, email, github) {
+    if (!github || !github.trim().length) {
+      throw new Error("Expected parameter 'github' to be a non-empty string");
     }
     super(name, id, email);
-    this.gitty = gitty;
+    this.github = github;
   }
 }
 
