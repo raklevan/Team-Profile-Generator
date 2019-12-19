@@ -55,8 +55,36 @@ async function render(employees) {
   // Render Engineer Templates
   // TODO
 
+  html.push(
+    employees
+      .filter(employee => employee instanceof Engineer)
+      .map(employee => {
+        let template = engineerTemplate;
+        for (const key in employee) {
+          template = replacePlaceholder(template, key, employee[key]);
+        }
+        return template;
+      })
+      .join("")
+  );
+
   // Render Intern Templates
   // TODO
+
+
+
+  html.push(
+    employees
+      .filter(employee => employee instanceof Engineer)
+      .map(employee => {
+        let template = engineerTemplate;
+        for (const key in employee) {
+          template = replacePlaceholder(template, key, employee[key]);
+        }
+        return template;
+      })
+      .join("")
+  );
 
   // If the build directory does not exist
   if (!fs.existsSync(buildDir)) {
